@@ -2,16 +2,16 @@
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
-RBGRPG/[Ll]ibrary/
-RBGRPG/[Tt]emp/
-RBGRPG/[Oo]bj/
-RBGRPG/[Bb]uild/
-RBGRPG/[Bb]uilds/
-RBGRPG/[Ll]ogs/
-RBGRPG/[Mm]emoryCaptures/
+RGBRPG/[Ll]ibrary/
+RGBRPG/[Tt]emp/
+RGBRPG/[Oo]bj/
+RGBRPG/[Bb]uild/
+RGBRPG/[Bb]uilds/
+RGBRPG/[Ll]ogs/
+RGBRPG/[Mm]emoryCaptures/
 
 # Asset meta data should only be ignored when the corresponding asset is also ignored
-!RBGRPG/[Aa]ssets/**/*.meta
+!RGBRPG/[Aa]ssets/**/*.meta
 
 # Uncomment this line if you wish to ignore the asset store tools plugin
 # /[Aa]ssets/AssetStoreTools*

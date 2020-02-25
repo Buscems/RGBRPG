@@ -15,8 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("Number identifier for each player, must be above 0")]
     public int playerNum;
 
-    enum Direction { North, South, East, West}
-    Direction currentDirection;
+    public enum Direction { North, South, East, West}
+    public Direction currentDirection;
     public Vector2 direction;
     bool isMoving;
     Vector3 startPos, endPos;

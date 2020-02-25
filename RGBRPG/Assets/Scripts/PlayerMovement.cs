@@ -17,10 +17,14 @@ public class PlayerMovement : MonoBehaviour
 
     enum Direction { North, South, East, West}
     Direction currentDirection;
-    Vector2 direction;
+    public Vector2 direction;
     bool isMoving;
     Vector3 startPos, endPos;
     float timeToMove;
+
+    Animator anim;
+
+    public float walkSpeed;
 
     private void Awake()
     {
@@ -33,7 +37,9 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        anim = GetComponent<Animator>();
+
     }
 
     // Update is called once per frame
@@ -44,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
         {
             direction = new Vector2(myPlayer.GetAxis("MoveHorizontal"), myPlayer.GetAxis("MoveVertical"));
 
-            if(Mathf.Abs(direction.x) > direction.y)
+            if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
             {
                 direction.y = 0;
             }
@@ -53,17 +59,69 @@ public class PlayerMovement : MonoBehaviour
                 direction.x = 0;
             }
 
-        }
-        
+            if(direction != Vector2.zero)
+            {
 
+                if(direction.x < 0)
+                {
+                    currentDirection = Direction.West;
+                }
+                if(direction.x > 0)
+                {
+                    currentDirection = Direction.East;
+                }
+                if(direction.y < 0)
+                {
+                    currentDirection = Direction.South;
+                }
+                if(direction.y > 0)
+                {
+                    currentDirection = Direction.North;
+                }
+
+                switch (currentDirection)
+                {
+                    case Direction.North:
+                        anim.SetFloat("Blend", 1);
+                        break;
+
+                    case Direction.East:
+                        anim.SetFloat("Blend", 3);
+                        break;
+
+                    case Direction.South:
+                        anim.SetFloat("Blend", 0);
+                        break;
+
+                    case Direction.West:
+                        anim.SetFloat("Blend", 2);
+                        break;
+                }
+
+                StartCoroutine(Movement(transform));
+            }
+        }
+
+        //animation stuff
+        anim.SetBool("isMoving", isMoving);
 
     }
 
-    IEnumerator Movement()
+    IEnumerator Movement(Transform entity)
     {
         isMoving = true;
 
+        startPos = entity.position;
+        timeToMove = 0;
+
         endPos = new Vector3(startPos.x + System.Math.Sign(direction.x), startPos.y + System.Math.Sign(direction.y), startPos.z);
+
+        while(timeToMove < 1f)
+        {
+            timeToMove += Time.deltaTime * walkSpeed;
+            entity.GetComponent<Rigidbody2D>().MovePosition(Vector3.Lerp(startPos, endPos, timeToMove));
+            yield return null;
+        }
 
         isMoving = false;
         yield return 0;

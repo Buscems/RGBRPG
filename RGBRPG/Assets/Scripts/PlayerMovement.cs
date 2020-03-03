@@ -24,6 +24,9 @@ public class PlayerMovement : MonoBehaviour
 
     Animator anim;
 
+    PlayerAttacks pa;
+    StateManager sm;
+
     public float walkSpeed;
 
     private void Awake()
@@ -38,6 +41,8 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
 
+        pa = GetComponent<PlayerAttacks>();
+        sm = GetComponent<StateManager>();
         anim = GetComponent<Animator>();
 
     }
@@ -45,60 +50,63 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (!isMoving)
+        if (GameControl.currentState == GameControl.GameState.Overworld)
         {
-            direction = new Vector2(myPlayer.GetAxis("MoveHorizontal"), myPlayer.GetAxis("MoveVertical"));
-
-            if(Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+            sm.enabled = false;
+            if (!isMoving)
             {
-                direction.y = 0;
-            }
-            else
-            {
-                direction.x = 0;
-            }
+                direction = new Vector2(myPlayer.GetAxis("MoveHorizontal"), myPlayer.GetAxis("MoveVertical"));
 
-            if(direction != Vector2.zero)
-            {
-
-                if(direction.x < 0)
+                if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
                 {
-                    currentDirection = Direction.West;
+                    direction.y = 0;
                 }
-                if(direction.x > 0)
+                else
                 {
-                    currentDirection = Direction.East;
-                }
-                if(direction.y < 0)
-                {
-                    currentDirection = Direction.South;
-                }
-                if(direction.y > 0)
-                {
-                    currentDirection = Direction.North;
+                    direction.x = 0;
                 }
 
-                switch (currentDirection)
+                if (direction != Vector2.zero)
                 {
-                    case Direction.North:
-                        anim.SetFloat("Blend", 1);
-                        break;
 
-                    case Direction.East:
-                        anim.SetFloat("Blend", 3);
-                        break;
+                    if (direction.x < 0)
+                    {
+                        currentDirection = Direction.West;
+                    }
+                    if (direction.x > 0)
+                    {
+                        currentDirection = Direction.East;
+                    }
+                    if (direction.y < 0)
+                    {
+                        currentDirection = Direction.South;
+                    }
+                    if (direction.y > 0)
+                    {
+                        currentDirection = Direction.North;
+                    }
 
-                    case Direction.South:
-                        anim.SetFloat("Blend", 0);
-                        break;
+                    switch (currentDirection)
+                    {
+                        case Direction.North:
+                            anim.SetFloat("Blend", 1);
+                            break;
 
-                    case Direction.West:
-                        anim.SetFloat("Blend", 2);
-                        break;
+                        case Direction.East:
+                            anim.SetFloat("Blend", 3);
+                            break;
+
+                        case Direction.South:
+                            anim.SetFloat("Blend", 0);
+                            break;
+
+                        case Direction.West:
+                            anim.SetFloat("Blend", 2);
+                            break;
+                    }
+
+                    StartCoroutine(Movement(transform));
                 }
-
-                StartCoroutine(Movement(transform));
             }
         }
 

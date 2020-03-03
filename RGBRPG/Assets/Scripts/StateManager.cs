@@ -32,7 +32,7 @@ public class StateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        currentState = GameState.MovementSelection;
         pa = GetComponent<PlayerAttacks>();
         pm = GetComponent<PlayerMovement>();
 

@@ -136,6 +136,14 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            GameControl.currentState = GameControl.GameState.Combat;
+        }
+    }
+
     //[REWIRED METHODS]
     //these two methods are for ReWired, if any of you guys have any questions about it I can answer them, but you don't need to worry about this for working on the game - Buscemi
     void OnControllerConnected(ControllerStatusChangedEventArgs arg)

@@ -27,13 +27,14 @@ public class PlayerMovement : MonoBehaviour
     Animator anim;
 
     PlayerAttacks pa;
-    StateManager sm;
     PlayerInventory pi;
 
     [Header("Combat Setup")]
     public GameObject redGoop;
     public GameObject greenGoop;
     public GameObject blueGoop;
+
+    Vector3[] spawnPos = new Vector3[3];
 
     public float walkSpeed;
 
@@ -48,12 +49,13 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        pa = GetComponent<PlayerAttacks>();
-        sm = GetComponent<StateManager>();
-        pi = GetComponent <PlayerInventory>();
-        anim = GetComponent<Animator>();
-
+        try
+        {
+            pa = GetComponent<PlayerAttacks>();
+            pi = GetComponent<PlayerInventory>();
+            anim = GetComponent<Animator>();
+        }
+        catch { }
     }
 
     // Update is called once per frame
@@ -63,8 +65,6 @@ public class PlayerMovement : MonoBehaviour
         {
 
             playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
-
-            sm.enabled = false;
             if (!isMoving)
             {
                 direction = new Vector2(myPlayer.GetAxis("MoveHorizontal"), myPlayer.GetAxis("MoveVertical"));
@@ -97,24 +97,26 @@ public class PlayerMovement : MonoBehaviour
                     {
                         currentDirection = Direction.North;
                     }
-
-                    switch (currentDirection)
+                    if (anim != null)
                     {
-                        case Direction.North:
-                            anim.SetFloat("Blend", 1);
-                            break;
+                        switch (currentDirection)
+                        {
+                            case Direction.North:
+                                anim.SetFloat("Blend", 1);
+                                break;
 
-                        case Direction.East:
-                            anim.SetFloat("Blend", 3);
-                            break;
+                            case Direction.East:
+                                anim.SetFloat("Blend", 3);
+                                break;
 
-                        case Direction.South:
-                            anim.SetFloat("Blend", 0);
-                            break;
+                            case Direction.South:
+                                anim.SetFloat("Blend", 0);
+                                break;
 
-                        case Direction.West:
-                            anim.SetFloat("Blend", 2);
-                            break;
+                            case Direction.West:
+                                anim.SetFloat("Blend", 2);
+                                break;
+                        }
                     }
 
                     StartCoroutine(Movement(transform));
@@ -122,9 +124,11 @@ public class PlayerMovement : MonoBehaviour
             }
         }
 
-        //animation stuff
-        anim.SetBool("isMoving", isMoving);
-
+        if (anim != null)
+        {
+            //animation stuff
+            anim.SetBool("isMoving", isMoving);
+        }
     }
 
     IEnumerator Movement(Transform entity)
@@ -153,8 +157,6 @@ public class PlayerMovement : MonoBehaviour
         if (collision.gameObject.tag == "Enemy")
         {
 
-            Vector3[] spawnPos = new Vector3[3];
-
             foreach (ContactPoint2D contact in collision.contacts)
             {
                 //am I getting hit from the top or bottom?
@@ -164,12 +166,20 @@ public class PlayerMovement : MonoBehaviour
                     { //am I being hit from below?
                         for (int i = 0; i < spawnPos.Length; i++)
                         {
-                            float spawnInterval = .5f;
-                            if(i % 2 != 0)
+                            float spawnInterval = 1;
+                            if(i % 2 == 0)
                             {
                                 spawnInterval *= -1;
                             }
-                            spawnPos[i] = new Vector3(transform.position.x + i * spawnInterval, transform.position.y + 2);
+                            int temp = i;
+                            if (i - 1 > 0)
+                            {
+                                if (i - 1 % 2 != 0)
+                                {
+                                    temp = i - 1;
+                                }
+                            }
+                            spawnPos[i] = new Vector3(transform.position.x + (temp * spawnInterval), transform.position.y + 2);
                         }
                     }
                     //am I being hit from above?
@@ -178,11 +188,19 @@ public class PlayerMovement : MonoBehaviour
                         for (int i = 0; i < spawnPos.Length; i++)
                         {
                             float spawnInterval = .5f;
-                            if (i % 2 != 0)
+                            if (i % 2 == 0)
                             {
                                 spawnInterval *= -1;
                             }
-                            spawnPos[i] = new Vector3(transform.position.x + i * spawnInterval, transform.position.y - 2);
+                            int temp = i;
+                            if (i - 1 > 0)
+                            {
+                                if (i - 1 % 2 != 0)
+                                {
+                                    temp = i - 1;
+                                }
+                            }
+                            spawnPos[i] = new Vector3(transform.position.x + temp * spawnInterval, transform.position.y - 2);
                         }
                     }
                 }
@@ -194,11 +212,19 @@ public class PlayerMovement : MonoBehaviour
                         for (int i = 0; i < spawnPos.Length; i++)
                         {
                             float spawnInterval = .5f;
-                            if (i % 2 != 0)
+                            if (i % 2 == 0)
                             {
                                 spawnInterval *= -1;
                             }
-                            spawnPos[i] = new Vector3(transform.position.x + 2, transform.position.y + i * spawnInterval);
+                            int temp = i;
+                            if (i - 1 > 0)
+                            {
+                                if (i - 1 % 2 != 0)
+                                {
+                                    temp = i - 1;
+                                }
+                            }
+                            spawnPos[i] = new Vector3(transform.position.x + 2, transform.position.y + temp * spawnInterval);
                         }
                     }
                     //am I being hit from the right?
@@ -207,43 +233,60 @@ public class PlayerMovement : MonoBehaviour
                         for (int i = 0; i < spawnPos.Length; i++)
                         {
                             float spawnInterval = .5f;
-                            if (i % 2 != 0)
+                            if (i % 2 == 0)
                             {
                                 spawnInterval *= -1;
                             }
-                            spawnPos[i] = new Vector3(transform.position.x - 2, transform.position.y + i * spawnInterval);
+                            int temp = i;
+                            if (i - 1 > 0)
+                            {
+                                if (i - 1 % 2 != 0)
+                                {
+                                    temp = i - 1;
+                                }
+                            }
+                            spawnPos[i] = new Vector3(transform.position.x - 2, transform.position.y + temp * spawnInterval);
                         }
                     }
                 }
             }
-            if (pi.redGoopAmount > 0)
-            {
-                Instantiate(redGoop, spawnPos[0], Quaternion.identity);
-                if (pi.greenGoopAmount > 0)
-                {
-                    Instantiate(greenGoop, spawnPos[1], Quaternion.identity);
-                    if (pi.blueGoopAmount > 0)
-                    {
-                        Instantiate(blueGoop, spawnPos[2], Quaternion.identity);
-                    }
-                }
-                else if (pi.blueGoopAmount > 0)
-                {
-                    Instantiate(blueGoop, spawnPos[1], Quaternion.identity);
-                }
-            }
-            else if(pi.greenGoopAmount > 0)
-            {
-
-            }
-            else if(pi.blueGoopAmount > 0)
-            {
-
-            }
-
+            StartCoroutine(DelayedSpawn());
             GameControl.currentState = GameControl.GameState.Combat;
         }
-        
+    }
+
+    IEnumerator DelayedSpawn()
+    {
+        yield return new WaitForSeconds(.5f);
+        if (pi.redGoopAmount > 0)
+        {
+            Instantiate(redGoop, spawnPos[0], Quaternion.identity);
+            if (pi.greenGoopAmount > 0)
+            {
+                Instantiate(greenGoop, spawnPos[1], Quaternion.identity);
+                if (pi.blueGoopAmount > 0)
+                {
+                    Instantiate(blueGoop, spawnPos[2], Quaternion.identity);
+                }
+            }
+            else if (pi.blueGoopAmount > 0)
+            {
+                Instantiate(blueGoop, spawnPos[1], Quaternion.identity);
+            }
+        }
+        else if (pi.greenGoopAmount > 0)
+        {
+            Instantiate(greenGoop, spawnPos[0], Quaternion.identity);
+            if (pi.greenGoopAmount > 0)
+            {
+                Instantiate(blueGoop, spawnPos[1], Quaternion.identity);
+            }
+        }
+        else if (pi.blueGoopAmount > 0)
+        {
+            Instantiate(blueGoop, spawnPos[0], Quaternion.identity);
+        }
+        this.gameObject.SetActive(false);
     }
 
     //[REWIRED METHODS]

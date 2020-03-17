@@ -1601,7 +1601,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887138147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.5, y: 1.5, z: 0}
+  m_LocalPosition: {x: -1.5, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1629,6 +1629,10 @@ MonoBehaviour:
   blueGoop: {fileID: 2403032963010682742, guid: dace4b654838c2a4a89537b94b546fb1,
     type: 3}
   walkSpeed: 3
+  canGoDown: 0
+  canGoUp: 0
+  canGoRight: 0
+  canGoLeft: 0
 --- !u!50 &887138151
 Rigidbody2D:
   serializedVersion: 4

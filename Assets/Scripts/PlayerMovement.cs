@@ -38,6 +38,11 @@ public class PlayerMovement : MonoBehaviour
 
     public float walkSpeed;
 
+    public bool canGoDown;
+    public bool canGoUp;
+    public bool canGoRight;
+    public bool canGoLeft;
+
     private void Awake()
     {
         //Rewired Code
@@ -56,6 +61,12 @@ public class PlayerMovement : MonoBehaviour
             anim = GetComponent<Animator>();
         }
         catch { }
+
+        canGoUp = true;
+        canGoDown = true;
+        canGoLeft = true;
+        canGoRight = true;
+
     }
 
     // Update is called once per frame
@@ -63,6 +74,83 @@ public class PlayerMovement : MonoBehaviour
     {
         if (GameControl.currentState == GameControl.GameState.Overworld)
         {
+
+            // Cast a ray straight down.
+            RaycastHit2D hitDown = Physics2D.Raycast(transform.position + new Vector3(0, -.51f, 0), -Vector2.up, .9f);
+            
+            Debug.DrawRay(transform.position, Vector2.up);
+            Debug.DrawRay(transform.position, -Vector2.right);
+            Debug.DrawRay(transform.position, Vector2.right);
+
+            // If it hits something...
+            if (hitDown.collider != null)
+            {
+                if (hitDown.collider.gameObject.layer == 8)
+                {
+                    canGoDown = false;
+                    Debug.Log("It work?");
+                    Debug.DrawRay(transform.position + new Vector3(0, -.51f, 0), -Vector2.up, Color.yellow);
+                }
+            }
+            else
+            {
+                Debug.DrawRay(transform.position + new Vector3(0, -.51f, 0), -Vector2.up, Color.white);
+                canGoDown = true;
+            }
+            // Cast a ray straight up.
+            RaycastHit2D hitUp = Physics2D.Raycast(transform.position + new Vector3(0, .51f, 0), Vector2.up, .9f);
+
+            // If it hits something...
+            if (hitUp.collider != null)
+            {
+                if (hitUp.collider.gameObject.layer == 8)
+                {
+                    canGoUp = false;
+                    Debug.Log("It work?");
+                    Debug.DrawRay(transform.position + new Vector3(0, .51f, 0), Vector2.up, Color.yellow);
+                }
+            }
+            else
+            {
+                Debug.DrawRay(transform.position + new Vector3(0, .51f, 0), Vector2.up, Color.white);
+                canGoUp = true;
+            }
+            // Cast a ray straight right.
+            RaycastHit2D hitRight = Physics2D.Raycast(transform.position + new Vector3(.51f, 0, 0), Vector2.right, .9f);
+
+            // If it hits something...
+            if (hitRight.collider != null)
+            {
+                if (hitRight.collider.gameObject.layer == 8)
+                {
+                    canGoRight = false;
+                    Debug.Log("It work?");
+                    Debug.DrawRay(transform.position + new Vector3(.51f, 0, 0), Vector2.right, Color.yellow);
+                }
+            }
+            else
+            {
+                Debug.DrawRay(transform.position + new Vector3(.51f, 0, 0), Vector2.right, Color.white);
+                canGoRight = true;
+            }
+            // Cast a ray straight left.
+            RaycastHit2D hitLeft = Physics2D.Raycast(transform.position + new Vector3(-.51f, 0, 0), -Vector2.right, .9f);
+
+            // If it hits something...
+            if (hitLeft.collider != null)
+            {
+                if (hitLeft.collider.gameObject.layer == 8)
+                {
+                    canGoLeft = false;
+                    Debug.Log("It work?");
+                    Debug.DrawRay(transform.position + new Vector3(-.51f, 0, 0), -Vector2.right, Color.yellow);
+                }
+            }
+            else
+            {
+                Debug.DrawRay(transform.position + new Vector3(-.51f, 0, 0), -Vector2.right, Color.white);
+                canGoLeft = true;
+            }
 
             playerCamera.transform.position = new Vector3(transform.position.x, transform.position.y, -10);
             if (!isMoving)
@@ -118,8 +206,27 @@ public class PlayerMovement : MonoBehaviour
                                 break;
                         }
                     }
+                    if (currentDirection == Direction.South && !canGoDown)
+                    {
 
-                    StartCoroutine(Movement(transform));
+                    }
+                    else if (currentDirection == Direction.North && !canGoUp)
+                    {
+
+                    }
+                    else if (currentDirection == Direction.East && !canGoRight)
+                    {
+
+                    }
+                    else if (currentDirection == Direction.West && !canGoLeft)
+                    {
+
+                    }
+                    else
+                    {
+                        Debug.Log("Yes");
+                        StartCoroutine(Movement(transform));
+                    }
                 }
             }
         }

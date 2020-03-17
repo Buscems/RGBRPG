@@ -26,6 +26,10 @@ public class PlayerAttacks : MonoBehaviour
 
     public int coneDistance;
 
+    [Header("Amount of Goops")]
+    public GameObject[] goops;
+    public int goopAmount;
+
     [HideInInspector]
     public bool hasChangedDirection;
 
@@ -41,6 +45,15 @@ public class PlayerAttacks : MonoBehaviour
     void Start()
     {
 
+        for (int i = 0; i < goops.Length; i++)
+        {
+            goops[i].SetActive(false);
+        }
+
+        for (int i = 0; i < goopAmount; i++)
+        {
+            goops[i].SetActive(true);
+        }
         for(int i = 0; i < attackIndicator.Length; i++)
         {
             attackIndicator[i].SetActive(false);

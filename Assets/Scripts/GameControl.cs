@@ -33,6 +33,9 @@ public class GameControl : MonoBehaviour
                 transition.SetActive(true);
                 enterCombatState = true;
             }
+
+
+
         }
     }
 }

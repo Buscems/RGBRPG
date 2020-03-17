@@ -187,7 +187,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         for (int i = 0; i < spawnPos.Length; i++)
                         {
-                            float spawnInterval = .5f;
+                            float spawnInterval = 1;
                             if (i % 2 == 0)
                             {
                                 spawnInterval *= -1;
@@ -211,7 +211,7 @@ public class PlayerMovement : MonoBehaviour
                     { //am I being hit from the left?
                         for (int i = 0; i < spawnPos.Length; i++)
                         {
-                            float spawnInterval = .5f;
+                            float spawnInterval = 1;
                             if (i % 2 == 0)
                             {
                                 spawnInterval *= -1;
@@ -232,7 +232,7 @@ public class PlayerMovement : MonoBehaviour
                     {
                         for (int i = 0; i < spawnPos.Length; i++)
                         {
-                            float spawnInterval = .5f;
+                            float spawnInterval = 1;
                             if (i % 2 == 0)
                             {
                                 spawnInterval *= -1;
@@ -260,7 +260,8 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(.5f);
         if (pi.redGoopAmount > 0)
         {
-            Instantiate(redGoop, spawnPos[0], Quaternion.identity);
+            var red = Instantiate(redGoop, spawnPos[0], Quaternion.identity);
+            red.GetComponent<PlayerAttacks>().goopAmount = pi.redGoopAmount;
             if (pi.greenGoopAmount > 0)
             {
                 Instantiate(greenGoop, spawnPos[1], Quaternion.identity);

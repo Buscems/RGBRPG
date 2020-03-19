@@ -1530,11 +1530,10 @@ GameObject:
   m_Component:
   - component: {fileID: 887138149}
   - component: {fileID: 887138148}
-  - component: {fileID: 887138150}
   - component: {fileID: 887138151}
   - component: {fileID: 887138152}
   - component: {fileID: 887138153}
-  - component: {fileID: 887138156}
+  - component: {fileID: 887138150}
   m_Layer: 10
   m_Name: Player
   m_TagString: Untagged
@@ -1601,7 +1600,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 887138147}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.5, y: 1.5, z: 0}
+  m_LocalPosition: {x: -2.5, y: 1.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1616,19 +1615,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 887138147}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0af5a9a82b65a94ab1f0761e780906d, type: 3}
+  m_Script: {fileID: 11500000, guid: fb185997412664645abde1e08836e1d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 1
+  redGoopAmount: 1
+  greenGoopAmount: 1
+  blueGoopAmount: 1
+  redAmount: {fileID: 1969454869}
+  greenAmount: {fileID: 1462088742}
+  blueAmount: {fileID: 1080267792}
   playerCamera: {fileID: 519420028}
   currentDirection: 0
   direction: {x: 0, y: 0}
+  walkSpeed: 2
   redGoop: {fileID: 4740923827174201108, guid: 2d19216fc07fe5949bcb0eca191fcfc8, type: 3}
   greenGoop: {fileID: 8542818892433656070, guid: c2b5a4d6d4be1ec4ebc7ecb8ecc1bf17,
     type: 3}
   blueGoop: {fileID: 2403032963010682742, guid: dace4b654838c2a4a89537b94b546fb1,
     type: 3}
-  walkSpeed: 3
   canGoDown: 0
   canGoUp: 0
   canGoRight: 0
@@ -1699,24 +1704,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &887138156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 887138147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c6b10f4d6e2851846b6c2638ed88397a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  redGoopAmount: 4
-  greenGoopAmount: 1
-  blueGoopAmount: 1
-  redAmount: {fileID: 1969454869}
-  greenAmount: {fileID: 1462088742}
-  blueAmount: {fileID: 1080267792}
 --- !u!1 &895701159
 GameObject:
   m_ObjectHideFlags: 0

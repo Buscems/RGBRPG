@@ -128,6 +128,7 @@
     <Compile Include="Assets\Scripts\CombatMovement.cs" />
     <Compile Include="Assets\Scripts\GameControl.cs" />
     <Compile Include="Assets\Scripts\MiscellaneousAnimationFunctions.cs" />
+    <Compile Include="Assets\Scripts\OverworldPlayer.cs" />
     <Compile Include="Assets\Scripts\PlayerAttacks.cs" />
     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />

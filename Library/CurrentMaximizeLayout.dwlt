@@ -23,7 +23,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 1
-  controlID: 4378
+  controlID: 17290
 --- !u!114 &2
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -137,7 +137,7 @@ MonoBehaviour:
   m_MinSize: {x: 709, y: 492}
   m_MaxSize: {x: 18004, y: 14042}
   vertical: 0
-  controlID: 4379
+  controlID: 17291
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -162,7 +162,7 @@ MonoBehaviour:
   m_MinSize: {x: 433, y: 492}
   m_MaxSize: {x: 14003, y: 14042}
   vertical: 1
-  controlID: 4350
+  controlID: 17250
 --- !u!114 &5
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -187,7 +187,7 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 221}
   m_MaxSize: {x: 8002, y: 4021}
   vertical: 0
-  controlID: 4253
+  controlID: 17251
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -245,7 +245,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 6cfbffff40360000aa360000
+      m_ExpandedIDs: b4cfffff6cfbffff40360000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -333,9 +333,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -1.5394882, y: -0.50634867, z: -25.320312}
+    m_Target: {x: -1.2440794, y: 1.4338171, z: -27.803732}
     speed: 2
-    m_Value: {x: -1.5394882, y: -0.50634867, z: -25.320312}
+    m_Value: {x: -1.2440794, y: 1.4338171, z: -27.803732}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -385,9 +385,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: 0, y: 0, z: 0, w: 1}
   m_Size:
-    m_Target: 4.21396
+    m_Target: 6.7932467
     speed: 2
-    m_Value: 4.21396
+    m_Value: 6.7932467
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -493,10 +493,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 370e52229c5daa94c94b998308ac51fd,
+  m_AnimatorController: {fileID: 9100000, guid: d9d7e1e5dc0282f429ed7d0f96eaeea7,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 6244412825004653276, guid: 370e52229c5daa94c94b998308ac51fd,
+  - m_Target: {fileID: -3345078235874685825, guid: d9d7e1e5dc0282f429ed7d0f96eaeea7,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -560,7 +560,7 @@ MonoBehaviour:
   m_MinSize: {x: 433, y: 271}
   m_MaxSize: {x: 14003, y: 10021}
   vertical: 0
-  controlID: 4351
+  controlID: 17229
 --- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -692,8 +692,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 7e360000
-    m_LastClickedInstanceID: 13950
+    m_SelectedInstanceIDs: aa360000
+    m_LastClickedInstanceID: 13994
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000c22a0000e607f7ff94abf6ffa2290000ec30feff801dfbff1a2a0000ae49faff5c290000c6350000562a0000b8350000e4580000ec5800008046000070330000aa2f00005c3500004a410000ca410000383c0000343c00001c3c0000243c0000a6560000064f0000204f0000083100000c580000
     m_RenameOverlay:
@@ -778,7 +778,7 @@ MonoBehaviour:
   m_ViewDataDictionary: {fileID: 0}
   m_LockTracker:
     m_IsLocked: 0
-  m_LastSelectedObjectID: 13950
+  m_LastSelectedObjectID: 13994
 --- !u!114 &17
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -803,7 +803,7 @@ MonoBehaviour:
   m_MinSize: {x: 276, y: 192}
   m_MaxSize: {x: 4001, y: 8042}
   vertical: 1
-  controlID: 4380
+  controlID: 17292
 --- !u!114 &18
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -823,8 +823,8 @@ MonoBehaviour:
     y: 0
     width: 851
     height: 892
-  m_MinSize: {x: 276, y: 71}
-  m_MaxSize: {x: 4001, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 19}
   m_Panes:
   - {fileID: 19}
@@ -868,7 +868,7 @@ MonoBehaviour:
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
-  m_LastInspectedObjectInstanceID: 13950
+  m_LastInspectedObjectInstanceID: 13994
   m_LastVerticalScrollValue: 100
 --- !u!114 &20
 MonoBehaviour:

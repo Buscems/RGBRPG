@@ -95,3 +95,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d514aea8df97f8c4cbe345859db11f93, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerNum: 1
+  currentDirection: 0
+  isFinished: 0
+  maxIndicators: 30

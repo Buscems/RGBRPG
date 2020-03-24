@@ -10,10 +10,16 @@ public class BasicOverworldEnemyMovement : MonoBehaviour
     [Header("Movement")]
     public float speed;
 
+    bool isMoving;
+    Vector3 startPos, endPos;
+    public GameObject endPosCollider;
+    float timeToMove;
+    public float walkSpeed;
+
     public enum Direction { Up, Down, Left, Right}
     public Direction thisDirection;
 
-    [HideInInspector]
+    //[HideInInspector]
     public Vector2 direction;
 
     public enum MovementStyle { MoveUntilWall, RandomlyChangeDirection, MoveInOneDirectionUntilTime }
@@ -22,7 +28,10 @@ public class BasicOverworldEnemyMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        if (this.transform.GetChild(0))
+        {
+            this.transform.GetChild(0).transform.SetParent(null);
+        }
         if(thisDirection == Direction.Up)
         {
             direction = new Vector2(0, 1);
@@ -53,11 +62,36 @@ public class BasicOverworldEnemyMovement : MonoBehaviour
             {
                 case MovementStyle.MoveUntilWall:
 
-                    MovementUntilWall();
+                    if (!isMoving)
+                    {
+                        StartCoroutine(Movement(transform));
+                    }
 
                     break;
             }
         }
+    }
+
+    IEnumerator Movement(Transform entity)
+    {
+        isMoving = true;
+
+        startPos = entity.position;
+        timeToMove = 0;
+
+        endPos = new Vector3(startPos.x + System.Math.Sign(direction.x), startPos.y + System.Math.Sign(direction.y), startPos.z);
+        endPosCollider.transform.position = endPos;
+
+        while (timeToMove < 1f)
+        {
+            timeToMove += Time.deltaTime * walkSpeed;
+            entity.GetComponent<Rigidbody2D>().MovePosition(Vector3.Lerp(startPos, endPos, timeToMove));
+            yield return null;
+        }
+
+        isMoving = false;
+        yield return 0;
+
     }
 
     void MovementUntilWall()
@@ -72,7 +106,7 @@ public class BasicOverworldEnemyMovement : MonoBehaviour
             case MovementStyle.MoveUntilWall:
                 if (collision.gameObject.layer == 8)
                 {
-                    direction = Vector2.Reflect(direction, collision.contacts[0].normal);
+                    direction *= -1;
                 }
                 break;
         }

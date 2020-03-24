@@ -37,6 +37,7 @@ public class OverworldPlayer : MonoBehaviour
     public Vector2 direction;
     bool isMoving;
     Vector3 startPos, endPos;
+    public GameObject endPosCollider;
     float timeToMove;
     public float walkSpeed;
     public AudioSource walkThud;
@@ -276,7 +277,7 @@ public class OverworldPlayer : MonoBehaviour
         timeToMove = 0;
 
         endPos = new Vector3(startPos.x + System.Math.Sign(direction.x), startPos.y + System.Math.Sign(direction.y), startPos.z);
-
+        endPosCollider.transform.position = endPos;
         while (timeToMove < 1f)
         {
             timeToMove += Time.deltaTime * walkSpeed;

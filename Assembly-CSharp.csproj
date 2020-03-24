@@ -125,7 +125,7 @@
     <Compile Include="Assets\Rewired\Internal\Scripts\Misc\ExternalTools.cs" />
     <Compile Include="Assets\Rewired\Internal\Scripts\Platforms\Ouya\OuyaInputSource.cs" />
     <Compile Include="Assets\Scripts\BasicOverworldEnemyMovement.cs" />
-    <Compile Include="Assets\Scripts\CombatMovement.cs" />
+    <Compile Include="Assets\Scripts\CombatPlayerMovement.cs" />
     <Compile Include="Assets\Scripts\GameControl.cs" />
     <Compile Include="Assets\Scripts\MiscellaneousAnimationFunctions.cs" />
     <Compile Include="Assets\Scripts\OverworldPlayer.cs" />

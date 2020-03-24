@@ -748,8 +748,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4740923827174201110}
   - component: {fileID: 421953153}
-  - component: {fileID: 421953154}
   - component: {fileID: -7166596637516887488}
+  - component: {fileID: 4359880551933846985}
   m_Layer: 0
   m_Name: RedBoi
   m_TagString: Untagged
@@ -810,26 +810,6 @@ MonoBehaviour:
   - {fileID: 14796917}
   goopAmount: 0
   hasChangedDirection: 0
---- !u!114 &421953154
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4740923827174201108}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e0af5a9a82b65a94ab1f0761e780906d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerNum: 1
-  playerCamera: {fileID: 0}
-  currentDirection: 0
-  direction: {x: 0, y: 0}
-  redGoop: {fileID: 0}
-  greenGoop: {fileID: 0}
-  blueGoop: {fileID: 0}
-  walkSpeed: 0
 --- !u!114 &-7166596637516887488
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -844,6 +824,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNum: 1
   currentState: 1
+--- !u!114 &4359880551933846985
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4740923827174201108}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d514aea8df97f8c4cbe345859db11f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2098864987
 PrefabInstance:
   m_ObjectHideFlags: 0

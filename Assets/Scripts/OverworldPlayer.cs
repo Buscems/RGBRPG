@@ -289,6 +289,139 @@ public class OverworldPlayer : MonoBehaviour
 
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+
+            var colPos = collision.gameObject.transform.position;
+
+            //am I being hit from below?
+            if (colPos.y < this.transform.position.y)
+            {
+                for (int i = 0; i < spawnPos.Length; i++)
+                {
+                    float spawnInterval = 1;
+                    if (i % 2 == 0)
+                    {
+                        spawnInterval *= -1;
+                    }
+                    int temp = i;
+                    if (i - 1 > 0)
+                    {
+                        if (i - 1 % 2 != 0)
+                        {
+                            temp = i - 1;
+                        }
+                    }
+                    spawnPos[i] = new Vector3(transform.position.x + (temp * spawnInterval), transform.position.y + 2);
+                }
+            }
+            /*
+            //am I being hit from above?
+            for (int i = 0; i < spawnPos.Length; i++)
+            {
+                float spawnInterval = 1;
+                if (i % 2 == 0)
+                {
+                    spawnInterval *= -1;
+                }
+                int temp = i;
+                if (i - 1 > 0)
+                {
+                    if (i - 1 % 2 != 0)
+                    {
+                        temp = i - 1;
+                    }
+                }
+                spawnPos[i] = new Vector3(transform.position.x + temp * spawnInterval, transform.position.y - 2);
+            }
+
+            //am I being hit from the left?
+            for (int i = 0; i < spawnPos.Length; i++)
+            {
+                float spawnInterval = 1;
+                if (i % 2 == 0)
+                {
+                    spawnInterval *= -1;
+                }
+                int temp = i;
+                if (i - 1 > 0)
+                {
+                    if (i - 1 % 2 != 0)
+                    {
+                        temp = i - 1;
+                    }
+                }
+                spawnPos[i] = new Vector3(transform.position.x + 2, transform.position.y + temp * spawnInterval);
+            }
+
+            //am I being hit from the right
+            for (int i = 0; i < spawnPos.Length; i++)
+            {
+                float spawnInterval = 1;
+                if (i % 2 == 0)
+                {
+                    spawnInterval *= -1;
+                }
+                int temp = i;
+                if (i - 1 > 0)
+                {
+                    if (i - 1 % 2 != 0)
+                    {
+                        temp = i - 1;
+                    }
+                }
+                spawnPos[i] = new Vector3(transform.position.x - 2, transform.position.y + temp * spawnInterval);
+            }
+            */
+            StartCoroutine(DelayedSpawn());
+            GameControl.currentState = GameControl.GameState.Combat;
+        }
+    }
+
+    IEnumerator DelayedSpawn()
+    {
+        yield return new WaitForSeconds(.5f);
+        if (redGoopAmount > 0)
+        {
+            var red = Instantiate(redGoop, spawnPos[0], Quaternion.identity);
+            red.GetComponent<PlayerAttacks>().goopAmount = redGoopAmount;
+            red.name = "RedGoops";
+            if (greenGoopAmount > 0)
+            {
+                var green = Instantiate(greenGoop, spawnPos[1], Quaternion.identity);
+                green.name = "GreenGoops";
+                if (blueGoopAmount > 0)
+                {
+                    var blue = Instantiate(blueGoop, spawnPos[2], Quaternion.identity);
+                    blue.name = "BlueGoops";
+                }
+            }
+            else if (blueGoopAmount > 0)
+            {
+                var blue = Instantiate(blueGoop, spawnPos[1], Quaternion.identity);
+                blue.name = "BlueGoops";
+            }
+        }
+        else if (greenGoopAmount > 0)
+        {
+            var green = Instantiate(greenGoop, spawnPos[0], Quaternion.identity);
+            green.name = "GreenGoops";
+            if (greenGoopAmount > 0)
+            {
+                var blue = Instantiate(blueGoop, spawnPos[1], Quaternion.identity);
+                blue.name = "BlueGoops";
+            }
+        }
+        else if (blueGoopAmount > 0)
+        {
+            var blue = Instantiate(blueGoop, spawnPos[0], Quaternion.identity);
+            blue.name = "BlueGoops";
+        }
+        this.gameObject.SetActive(false);
+    }
+
     //[REWIRED METHODS]
     //these two methods are for ReWired, if any of you guys have any questions about it I can answer them, but you don't need to worry about this for working on the game - Buscemi
     void OnControllerConnected(ControllerStatusChangedEventArgs arg)

@@ -19,6 +19,9 @@ public class MiscellaneousAnimationFunctions : MonoBehaviour
     public void TimeScaleOne()
     {
         Time.timeScale = 1;
+
+        GameControl.currentCombatState = GameControl.CombatState.PickMovement;
+
     }
 
 }

@@ -102,6 +102,10 @@ public class OverworldPlayer : MonoBehaviour
                     Debug.Log("It work?");
                     Debug.DrawRay(transform.position + new Vector3(0, -.51f, 0), -Vector2.up, Color.yellow);
                 }
+                if(hitDown.collider.gameObject.layer == 13)
+                {
+                    playThud = true;
+                }
             }
             else
             {
@@ -119,6 +123,10 @@ public class OverworldPlayer : MonoBehaviour
                     canGoUp = false;
                     Debug.Log("It work?");
                     Debug.DrawRay(transform.position + new Vector3(0, .51f, 0), Vector2.up, Color.yellow);
+                }
+                if(hitUp.collider.gameObject.layer == 13)
+                {
+                    playThud = true;
                 }
             }
             else
@@ -138,6 +146,10 @@ public class OverworldPlayer : MonoBehaviour
                     Debug.Log("It work?");
                     Debug.DrawRay(transform.position + new Vector3(.51f, 0, 0), Vector2.right, Color.yellow);
                 }
+                if(hitRight.collider.gameObject.layer == 13)
+                {
+                    playThud = true;
+                }
             }
             else
             {
@@ -155,6 +167,10 @@ public class OverworldPlayer : MonoBehaviour
                     canGoLeft = false;
                     Debug.Log("It work?");
                     Debug.DrawRay(transform.position + new Vector3(-.51f, 0, 0), -Vector2.right, Color.yellow);
+                }
+                if(hitLeft.collider.gameObject.layer == 13)
+                {
+                    playThud = true;
                 }
             }
             else

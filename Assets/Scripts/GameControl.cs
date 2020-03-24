@@ -22,7 +22,7 @@ public class GameControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        currentState = GameState.Overworld;
+        currentState = GameState.Combat;
         transition.SetActive(false);
 
         currentCombatState = CombatState.NotInCombat;

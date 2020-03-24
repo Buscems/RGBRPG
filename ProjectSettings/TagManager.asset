@@ -19,8 +19,8 @@ TagManager:
   - Player
   - Enemy
   - EnemyTrigger
-  - 
-  - 
+  - EnemyEndPos
+  - PlayerEndPos
   - 
   - 
   - 

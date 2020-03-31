@@ -17,7 +17,14 @@ public class GameControl : MonoBehaviour
 
     public GameObject transition;
 
+    public int currentMaxMovementIndicators;
+
     Queue<GameObject> goopQueue = new Queue<GameObject>();
+    //Queue<GameObject> 
+
+    public Image finishedRed;
+    public Image finishedGreen;
+    public Image finishedBlue;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +33,9 @@ public class GameControl : MonoBehaviour
         transition.SetActive(false);
 
         currentCombatState = CombatState.NotInCombat;
-
+        finishedRed.enabled = false;
+        finishedGreen.enabled = false;
+        finishedBlue.enabled = false;
     }
 
     // Update is called once per frame
@@ -64,8 +73,23 @@ public class GameControl : MonoBehaviour
                 if (goopQueue.Count > 0)
                 {
                     goopQueue.Peek().GetComponent<CombatPlayerMovement>().enabled = true;
+                    CombatPlayerMovement.maxIndicators = currentMaxMovementIndicators;
+                    //goopQueue.Peek().GetComponent<CombatPlayerMovement>().AddToQueue();
                     if (goopQueue.Peek().GetComponent<CombatPlayerMovement>().isFinished)
                     {
+                        if(goopQueue.Peek().name == "RedGoops")
+                        {
+                            finishedRed.enabled = true;
+                        }
+                        if (goopQueue.Peek().name == "GreenGoops")
+                        {
+                            finishedGreen.enabled = true;
+                        }
+                        if (goopQueue.Peek().name == "BlueGoops")
+                        {
+                            finishedBlue.enabled = true;
+                        }
+                        currentMaxMovementIndicators -= goopQueue.Peek().GetComponent<CombatPlayerMovement>().currentMovementIndicator.Count;
                         goopQueue.Peek().GetComponent<CombatPlayerMovement>().enabled = false;
                         goopQueue.Dequeue();
                     }

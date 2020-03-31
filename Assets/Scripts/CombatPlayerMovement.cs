@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Rewired;
 using Rewired.ControllerExtensions;
+using UnityEngine.UI;
 
 public class CombatPlayerMovement : MonoBehaviour
 {
@@ -27,10 +28,12 @@ public class CombatPlayerMovement : MonoBehaviour
     Vector2 lastDirection;
     Vector2 lastPressedDirection;
 
+    public Color movementIndicatorColor;
+
     Stack<GameObject> movementIndicators = new Stack<GameObject>();
-    Stack<GameObject> currentMovementIndicator = new Stack<GameObject>();
+    public Stack<GameObject> currentMovementIndicator = new Stack<GameObject>();
     Stack<Vector2> lastPressedDirections = new Stack<Vector2>();
-    public int maxIndicators;
+    public static int maxIndicators;
 
     public bool isFinished;
 
@@ -40,6 +43,8 @@ public class CombatPlayerMovement : MonoBehaviour
 
     public int moveSpeed;
     int moveCounter;
+
+    bool hasAddedToQueue;
 
     private void Awake()
     {
@@ -54,15 +59,17 @@ public class CombatPlayerMovement : MonoBehaviour
     {
         lastPressedDirection = Vector2.right;
         lastPressedDirections.Push(Vector2.right);
-        for(int i = maxIndicators; i >= 0; i--)
-        {
-            movementIndicators.Push(GameObject.Find("MovementIndicator (" + i + ")"));
-        }
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!hasAddedToQueue)
+        {
+            AddToQueue();
+            hasAddedToQueue = true;
+        }
+
         SelectMovementSpot();
 
         //resetMovement
@@ -76,6 +83,15 @@ public class CombatPlayerMovement : MonoBehaviour
             movedDirection = false;
             moveCounter = 0;
         }
+
+    }
+
+    public void AddToQueue()
+    {
+        for (int i = 0; i < maxIndicators; i++)
+        {
+            movementIndicators.Push(GameObject.Find("MovementIndicator (" + i + ")"));
+        }
     }
 
     void SelectMovementSpot()
@@ -86,6 +102,7 @@ public class CombatPlayerMovement : MonoBehaviour
         {
             var thisIndicator = movementIndicators.Peek();
             thisIndicator.transform.position = this.transform.position;
+            thisIndicator.GetComponent<SpriteRenderer>().color = movementIndicatorColor;
             currentMovementIndicator.Push(thisIndicator);
             movementIndicators.Pop();
             lastDirection = thisIndicator.transform.position;
@@ -138,6 +155,7 @@ public class CombatPlayerMovement : MonoBehaviour
             }
             var thisIndicator = currentMovementIndicator.Peek();
             thisIndicator.transform.position = lastDirection + direction;
+            thisIndicator.GetComponent<SpriteRenderer>().color = movementIndicatorColor;
             thisIndicator.GetComponent<SpriteRenderer>().enabled = false;
             /*
             foreach (GameObject g in currentMovementIndicator)
@@ -156,9 +174,9 @@ public class CombatPlayerMovement : MonoBehaviour
             */
         }
 
-        if (myPlayer.GetButtonDown("Select") && canSelectPosition)
+        if (myPlayer.GetButtonDown("Select"))
         {
-            
+            isFinished = true;
         }
 
         if (direction == lastPressedDirections.Peek() && moveCounter >= 1 && canSelectPosition)

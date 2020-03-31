@@ -1,7 +1,22 @@
 fileFormatVersion: 2
 guid: 77914b43efd67304591d4051a3a389f0
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 8875029477633931703
+    second: RGB Flying Enemy Tier 1 Right Blue_0
+  - first:
+      213: 852800154712975224
+    second: RGB Flying Enemy Tier 1 Right Blue_1
+  - first:
+      213: -2752143398660889828
+    second: RGB Flying Enemy Tier 1 Right Blue_2
+  - first:
+      213: -1067831601152964887
+    second: RGB Flying Enemy Tier 1 Right Blue_3
+  - first:
+      213: -5422485352459906916
+    second: RGB Flying Enemy Tier 1 Right Blue_4
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -84,7 +99,112 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: RGB Flying Enemy Tier 1 Right Blue_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7b9bd79b9407a2b70800000000000000
+      internalID: 8875029477633931703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RGB Flying Enemy Tier 1 Right Blue_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 877a01ee831c5db00800000000000000
+      internalID: 852800154712975224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RGB Flying Enemy Tier 1 Right Blue_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c13a1ef092c6ec9d0800000000000000
+      internalID: -2752143398660889828
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RGB Flying Enemy Tier 1 Right Blue_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e6475df0dc4e21f0800000000000000
+      internalID: -1067831601152964887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: RGB Flying Enemy Tier 1 Right Blue_4
+      rect:
+        serializedVersion: 2
+        x: 256
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c905ede2d467fb4b0800000000000000
+      internalID: -5422485352459906916
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []

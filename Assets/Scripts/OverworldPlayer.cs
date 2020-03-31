@@ -403,31 +403,36 @@ public class OverworldPlayer : MonoBehaviour
         if (redGoopAmount > 0)
         {
             var red = Instantiate(redGoop, spawnPos[0], Quaternion.identity);
-            red.GetComponent<PlayerAttacks>().goopAmount = redGoopAmount;
+            red.GetComponent<StateManager>().goopAmount = redGoopAmount;
             red.name = "RedGoops";
             if (greenGoopAmount > 0)
             {
                 var green = Instantiate(greenGoop, spawnPos[1], Quaternion.identity);
+                green.GetComponent<StateManager>().goopAmount = greenGoopAmount;
                 green.name = "GreenGoops";
                 if (blueGoopAmount > 0)
                 {
                     var blue = Instantiate(blueGoop, spawnPos[2], Quaternion.identity);
+                    blue.GetComponent<StateManager>().goopAmount = blueGoopAmount;
                     blue.name = "BlueGoops";
                 }
             }
             else if (blueGoopAmount > 0)
             {
                 var blue = Instantiate(blueGoop, spawnPos[1], Quaternion.identity);
+                blue.GetComponent<StateManager>().goopAmount = blueGoopAmount;
                 blue.name = "BlueGoops";
             }
         }
         else if (greenGoopAmount > 0)
         {
             var green = Instantiate(greenGoop, spawnPos[0], Quaternion.identity);
+            green.GetComponent<StateManager>().goopAmount = greenGoopAmount;
             green.name = "GreenGoops";
             if (greenGoopAmount > 0)
             {
                 var blue = Instantiate(blueGoop, spawnPos[1], Quaternion.identity);
+                blue.GetComponent<StateManager>().goopAmount = blueGoopAmount;
                 blue.name = "BlueGoops";
             }
         }

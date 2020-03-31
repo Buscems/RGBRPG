@@ -19,16 +19,9 @@ public class PlayerAttacks : MonoBehaviour
     public AttackType currentAttack;
 
     public GameObject[] attackIndicator;
-
-    PlayerMovement pm;
-
     Vector3 attackDirection;
 
     public int coneDistance;
-
-    [Header("Amount of Goops")]
-    public GameObject[] goops;
-    public int goopAmount;
 
     [HideInInspector]
     public bool hasChangedDirection;
@@ -44,29 +37,14 @@ public class PlayerAttacks : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        for (int i = 0; i < goops.Length; i++)
-        {
-            goops[i].SetActive(false);
-        }
-
-        for (int i = 0; i < goopAmount; i++)
-        {
-            goops[i].SetActive(true);
-        }
-        for(int i = 0; i < attackIndicator.Length; i++)
-        {
-            attackIndicator[i].SetActive(false);
-        }
-
-        pm = this.GetComponent<PlayerMovement>();
+        
+        
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
         attackDirection = new Vector2(myPlayer.GetAxis("MoveHorizontal"), myPlayer.GetAxis("MoveVertical"));
 
         if (Mathf.Abs(attackDirection.x) > Mathf.Abs(attackDirection.y))
@@ -80,59 +58,7 @@ public class PlayerAttacks : MonoBehaviour
 
         if (currentAttack == AttackType.ConeAttack)
         {
-            attackIndicator[0].SetActive(true);
-            if (!hasChangedDirection)
-            {
-                if (pm.currentDirection == PlayerMovement.Direction.East)
-                {
-                    attackIndicator[0].transform.position = new Vector3(transform.position.x + 1, transform.position.y, 0);
-                }
-                if (pm.currentDirection == PlayerMovement.Direction.West)
-                {
-                    attackIndicator[0].transform.position = new Vector3(transform.position.x - 1, transform.position.y, 0);
-                }
-                if (pm.currentDirection == PlayerMovement.Direction.North)
-                {
-                    attackIndicator[0].transform.position = new Vector3(transform.position.x, transform.position.y + 1, 0);
-                }
-                if (pm.currentDirection == PlayerMovement.Direction.South)
-                {
-                    attackIndicator[0].transform.position = new Vector3(transform.position.x, transform.position.y - 1, 0);
-                }
-            }
-
-            if (attackDirection.x > 0)
-            {
-                if (!hasChangedDirection)
-                {
-                    hasChangedDirection = true;
-                }
-                attackIndicator[0].transform.position = new Vector3(transform.position.x + 1, transform.position.y, 0);
-            }
-            if (attackDirection.x < 0)
-            {
-                if (!hasChangedDirection)
-                {
-                    hasChangedDirection = true;
-                }
-                attackIndicator[0].transform.position = new Vector3(transform.position.x - 1, transform.position.y, 0);
-            }
-            if (attackDirection.y > 0)
-            {
-                if (!hasChangedDirection)
-                {
-                    hasChangedDirection = true;
-                }
-                attackIndicator[0].transform.position = new Vector3(this.transform.position.x, transform.position.y + 1, 0);
-            }
-            if (attackDirection.y < 0)
-            {
-                if (!hasChangedDirection)
-                {
-                    hasChangedDirection = true;
-                }
-                attackIndicator[0].transform.position = new Vector3(this.transform.position.x, transform.position.y - 1, 0);
-            }
+            
         }
         
     }

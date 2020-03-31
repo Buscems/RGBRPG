@@ -370,7 +370,7 @@ public class PlayerMovement : MonoBehaviour
         if (pi.redGoopAmount > 0)
         {
             var red = Instantiate(redGoop, spawnPos[0], Quaternion.identity);
-            red.GetComponent<PlayerAttacks>().goopAmount = pi.redGoopAmount;
+            //red.GetComponent<PlayerAttacks>().goopAmount = pi.redGoopAmount;
             if (pi.greenGoopAmount > 0)
             {
                 Instantiate(greenGoop, spawnPos[1], Quaternion.identity);

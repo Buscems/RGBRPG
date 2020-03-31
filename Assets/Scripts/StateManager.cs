@@ -15,11 +15,14 @@ public class StateManager : MonoBehaviour
     [Tooltip("Number identifier for each player, must be above 0")]
     public int playerNum;
 
+    [Header("Amount of Goops")]
+    public GameObject[] goops;
+    public int goopAmount;
+
     public enum GameState { MovementSelection, SelectAttack, SelectAttackTarget }
     public GameState currentState;
 
     PlayerAttacks pa;
-    PlayerMovement pm;
 
     private void Awake()
     {
@@ -32,9 +35,19 @@ public class StateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        for (int i = 0; i < goops.Length; i++)
+        {
+            goops[i].SetActive(false);
+        }
+
+        for (int i = 0; i < goopAmount; i++)
+        {
+            goops[i].SetActive(true);
+        }
+
         currentState = GameState.MovementSelection;
         pa = GetComponent<PlayerAttacks>();
-        pm = GetComponent<PlayerMovement>();
 
         pa.enabled = false;
     }
@@ -46,7 +59,6 @@ public class StateManager : MonoBehaviour
         if(currentState == GameState.SelectAttack && myPlayer.GetButtonDown("Select"))
         {
             currentState = GameState.SelectAttackTarget;
-            pm.enabled = false;
             pa.enabled = true;
         }
 
@@ -58,7 +70,6 @@ public class StateManager : MonoBehaviour
                 pa.attackIndicator[i].SetActive(false);
             }
             pa.hasChangedDirection = false;
-            pm.enabled = true;
             pa.enabled = false;
         }
 

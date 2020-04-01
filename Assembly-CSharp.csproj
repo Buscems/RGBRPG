@@ -132,6 +132,7 @@
     <Compile Include="Assets\Scripts\PlayerAttacks.cs" />
     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\RealCombatPlayerMovement.cs" />
     <Compile Include="Assets\Scripts\StateManager.cs" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
     <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />

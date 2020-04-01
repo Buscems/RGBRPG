@@ -93,6 +93,11 @@ public class GameControl : MonoBehaviour
                     }
                     goops = goopQueue.ToArray();
                     goopQueue.Clear();
+                    for (int i = 0; i < goops.Length; i++)
+                    {
+                        goops[i].GetComponent<RealCombatPlayerMovement>().enabled = false;
+                    }
+                    enterMovementState = true;
                 }
 
                 if (goops.Length > 0)
@@ -126,11 +131,11 @@ public class GameControl : MonoBehaviour
 
                     CombatPlayerMovement.maxIndicators = currentMaxMovementIndicators;
 
-                    goops[currentGoop].GetComponent<CombatPlayerMovement>().enabled = true;
+                    goops[currentGoop].GetComponent<RealCombatPlayerMovement>().enabled = true;
 
                     if (myPlayer.GetButtonDown("RB"))
                     {
-                        currentMaxMovementIndicators -= goops[currentGoop].GetComponent<CombatPlayerMovement>().currentMovementIndicator.Count - 1;
+                        //currentMaxMovementIndicators -= goops[currentGoop].GetComponent<RealCombatPlayerMovement>().currentMovementIndicator.Count - 1;
                         if (currentGoop < goops.Length - 1)
                         {
                             currentGoop++;
@@ -141,23 +146,23 @@ public class GameControl : MonoBehaviour
                         }
                         for(int i = 0; i < goops.Length; i++)
                         {
-                            goops[i].GetComponent<CombatPlayerMovement>().enabled = false;
+                            goops[i].GetComponent<RealCombatPlayerMovement>().enabled = false;
                         }
                     }
                     if (myPlayer.GetButtonDown("LB"))
                     {
-                        currentMaxMovementIndicators -= goops[currentGoop].GetComponent<CombatPlayerMovement>().currentMovementIndicator.Count;
+                        //currentMaxMovementIndicators -= goops[currentGoop].GetComponent<RealCombatPlayerMovement>().currentMovementIndicator.Count;
                         if (currentGoop > 0)
                         {
                             currentGoop--;
                         }
                         else
                         {
-                            currentGoop = goops.Length;
+                            currentGoop = goops.Length - 1;
                         }
                         for (int i = 0; i < goops.Length; i++)
                         {
-                            goops[i].GetComponent<CombatPlayerMovement>().enabled = false;
+                            goops[i].GetComponent<RealCombatPlayerMovement>().enabled = false;
                         }
                     }
 

@@ -17,10 +17,21 @@ public class RealCombatPlayerMovement : MonoBehaviour
 
     Vector2 direction;
 
-    Vector3 moveFromPos;
-
     public enum Direction { North, South, East, West }
     public Direction currentDirection;
+
+    bool isMoving;
+    Vector3 startPos, endPos;
+    float timeToMove;
+    public float walkSpeed;
+
+    [HideInInspector]
+    public Coroutine[] movementCoroutines = new Coroutine[2];
+    Coroutine moving;
+
+    public GameObject emergencyHitbox;
+
+    public GameObject lowOpacityMarker;
 
     public Color movementIndicatorColor;
 
@@ -36,7 +47,12 @@ public class RealCombatPlayerMovement : MonoBehaviour
     public int moveSpeed;
     public int moveCounter;
 
+    public bool hasStartedMoving;
+
     bool hasAddedToQueue;
+
+    [HideInInspector]
+    public bool movementHasFinished;
 
     [SerializeField]
     GameObject[] movementIndicators;
@@ -68,6 +84,9 @@ public class RealCombatPlayerMovement : MonoBehaviour
             movementIndicatorHolder = GameObject.Find("BlueMovementIndicators");
         }
 
+        emergencyHitbox.SetActive(false);
+        lowOpacityMarker.SetActive(false);
+
     }
 
     // Update is called once per frame
@@ -79,16 +98,23 @@ public class RealCombatPlayerMovement : MonoBehaviour
             hasAddedToQueue = true;
         }
 
-        SelectMovementSpot();
+        if (!isFinished)
+        {
+            SelectMovementSpot();
+        }
 
         //resetMovement
-        if (myPlayer.GetButtonDown("Back"))
+        if (myPlayer.GetButtonDown("Back") && !isFinished)
         {
             for (int i = 0; i < moveSpeed; i++)
             {
                 movementIndicators[i].transform.position = new Vector3(100000, 0, 0);
             }
             movedDirection = false;
+        }
+        else if(myPlayer.GetButtonDown("Back") && isFinished)
+        {
+            isFinished = false;
         }
     }
 
@@ -163,6 +189,11 @@ public class RealCombatPlayerMovement : MonoBehaviour
         if (myPlayer.GetButtonDown("Select"))
         {
             isFinished = true;
+            if (moveCounter > 0)
+            {
+                lowOpacityMarker.SetActive(true);
+                lowOpacityMarker.transform.position = movementIndicators[moveCounter - 1].transform.position;
+            }
         }
 
         if (direction == lastPressedDirections.Peek() && moveCounter >= 1 && canSelectPosition)
@@ -205,7 +236,81 @@ public class RealCombatPlayerMovement : MonoBehaviour
         }
 
     }
-    
+
+    public IEnumerator DoCombatMovement()
+    {
+        hasStartedMoving = true;
+
+        for(int i = 0; i < moveCounter; i++)
+        {
+            movementCoroutines[1] = StartCoroutine(Movement(this.transform, movementIndicators[i].transform));
+            while (isMoving)
+            {
+                yield return null;
+            }
+        }
+        movementHasFinished = true;
+    }
+
+    IEnumerator Movement(Transform entity, Transform destination)
+    {
+        isMoving = true;
+
+        
+        timeToMove = 0;
+        startPos = entity.position;
+        endPos = destination.position;
+
+        while (timeToMove < 1f)
+        {
+            timeToMove += Time.deltaTime * walkSpeed;
+            entity.GetComponent<Rigidbody2D>().MovePosition(Vector3.Lerp(startPos, endPos, timeToMove));
+            yield return null;
+        }
+
+        isMoving = false;
+        yield return 0;
+
+    }
+    IEnumerator Movement(Transform entity)
+    {
+        isMoving = true;
+
+        emergencyHitbox.SetActive(true);
+
+        timeToMove = 0;
+
+        while (timeToMove < 1f)
+        {
+            timeToMove += Time.deltaTime * walkSpeed;
+            entity.GetComponent<Rigidbody2D>().MovePosition(Vector3.Lerp(startPos, endPos, timeToMove));
+            yield return null;
+        }
+
+        isMoving = false;
+        yield return 0;
+
+        movementHasFinished = true;
+
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (isMoving)
+        {
+            if (moving == null)
+            {
+                for (int i = 0; i < movementCoroutines.Length; i++)
+                {
+                    StopCoroutine(movementCoroutines[i]);
+                }
+                endPos = startPos;
+                startPos = this.transform.position;
+                moving = StartCoroutine(Movement(this.transform));
+            }
+        }
+    }
+
     //[REWIRED METHODS]
     //these two methods are for ReWired, if any of you guys have any questions about it I can answer them, but you don't need to worry about this for working on the game - Buscemi
     void OnControllerConnected(ControllerStatusChangedEventArgs arg)

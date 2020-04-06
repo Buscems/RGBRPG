@@ -24,6 +24,9 @@ public class PlayerAttacks : MonoBehaviour
     public int coneDistance;
 
     [HideInInspector]
+    public bool isFinished;
+
+    [HideInInspector]
     public bool hasChangedDirection;
 
     private void Awake()

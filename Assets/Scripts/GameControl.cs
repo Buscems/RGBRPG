@@ -16,7 +16,20 @@ public class GameControl : MonoBehaviour
     [Tooltip("Number identifier for each player, must be above 0")]
     public int playerNum;
 
+    [Header("Camera Variables")]
     public GameObject playerCamera;
+
+    public Transform cameraTarget;
+
+    bool moveCamera;
+
+    public float cameraMinDist;
+
+    public float cameraSpeed;
+
+    public float zoomCameraSize;
+
+    public float startCameraSize;
 
     public enum GameState { Overworld, Combat }
     public static GameState currentState;
@@ -66,12 +79,18 @@ public class GameControl : MonoBehaviour
 
         currentGoop = 0;
 
+        startCameraSize = playerCamera.GetComponent<Camera>().orthographicSize;
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (cameraTarget != null)
+        {
+            Debug.Log((playerCamera.transform.position - cameraTarget.position).magnitude);
+        }
+
         if(currentState == GameState.Combat)
         {
 
@@ -108,6 +127,9 @@ public class GameControl : MonoBehaviour
                         goops[i].GetComponent<PlayerAttacks>().enabled = false;
                     }
                     enterMovementState = true;
+                    cameraTarget = goops[0].transform;
+                    //StartCoroutine(MoveCamera());
+                    
                 }
 
                 if (goops.Length > 0)
@@ -230,6 +252,14 @@ public class GameControl : MonoBehaviour
         }
     }
 
+    private void FixedUpdate()
+    {
+        if (moveCamera)
+        {
+            MoveCamera();
+        }
+    }
+
     private bool AllGoopsLockedIn()
     {
         if (currentCombatState == CombatState.PickMovement)
@@ -267,6 +297,22 @@ public class GameControl : MonoBehaviour
         }
 
         return true;
+    }
+
+    IEnumerator MoveCamera()
+    {
+        Vector3 playerPos = cameraTarget.position;
+
+        playerPos.z = -10;
+        Vector3 currentPos = playerCamera.transform.position;
+        currentPos.z = -10;
+
+        while ((playerCamera.transform.position - cameraTarget.position).magnitude > cameraMinDist || playerCamera.GetComponent<Camera>().orthographicSize > zoomCameraSize)
+        {
+            playerCamera.transform.position = Vector3.Slerp(currentPos, playerPos, cameraSpeed * Time.fixedDeltaTime);
+            playerCamera.GetComponent<Camera>().orthographicSize = Mathf.Lerp(playerCamera.GetComponent<Camera>().orthographicSize, zoomCameraSize, .001f);
+            yield return null;
+        }
     }
 
     //[REWIRED METHODS]

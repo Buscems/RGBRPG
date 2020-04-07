@@ -12400,7 +12400,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNum: 1
-  playerCamera: {fileID: 0}
+  playerCamera: {fileID: 519420028}
+  cameraTarget: {fileID: 0}
+  cameraMinDist: 0.1
+  cameraSpeed: 0.5
+  zoomCameraSize: 2
+  startCameraSize: 0
   transition: {fileID: 99185845}
   currentMaxMovementIndicators: 30
   currentGoop: 0
